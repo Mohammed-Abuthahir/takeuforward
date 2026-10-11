@@ -1,0 +1,48 @@
+// 23. Implement Min Stack
+import java.util.*;
+import java.util.Scanner;
+import java.util.Arrays;
+class minimumstack{
+    public static void main(String[] args){
+        MinStack minstack = new MinStack();
+        minstack.push(-2);
+        minstack.push(0);
+        minstack.push(-3);
+        System.out.println(minstack.getMin());
+        minstack.pop();
+        System.out.println(minstack.top());
+        System.out.println(minstack.getMin());
+    }
+}
+
+class MinStack{
+    Stack<Integer> s1;
+    Stack<Integer> s2;
+    public MinStack(){
+        s1 = new Stack<>();
+        s2 = new Stack<>();
+    }
+
+    public void push(int val){
+        s1.push(val);
+        if(s2.isEmpty() || s2.peek() >= val){
+            s2.push(val);
+        }
+    }
+
+    public void pop(){
+        if(s1.isEmpty()) return;
+        if(s1.peek().equals(s2.peek())){
+            s2.pop();
+        }
+        s1.pop();
+    }
+
+    public int top(){
+        return s1.peek();
+    }
+    
+    public int getMin(){
+        return s2.peek();
+    }
+}
