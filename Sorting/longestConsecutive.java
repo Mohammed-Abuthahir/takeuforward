@@ -4,25 +4,17 @@ import java.util.Arrays;
 import java.util.Scanner;
 class longestConsecutive{
     public static int longestConsecutive(int[] nums){
+        if(nums.length == 0) return 0;
         TreeSet<Integer> set = new TreeSet<>();
-        for(int num : nums){
-            set.add(num);
-        }
-        int[] arr = new int[set.size()];
-        int idx = 0;
-        for(int num : set){
-            arr[idx++] = num;
-        }
+        for(int num : nums) set.add(num);
         int count = 1;
         int max = Integer.MIN_VALUE;
-        for(int i = 1;i < arr.length; i++){
-            if(arr[i] - arr[i - 1] == 1){
+        for(int num : set){
+            if(set.contains(num - 1)){
                 count++;
                 max = Math.max(max, count);
             }
-            else{
-                count = 1;
-            }
+            else count = 1;
         }
         if(max <= 0) return 1;
         return max;
